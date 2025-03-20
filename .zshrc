@@ -22,13 +22,11 @@ zinit light-mode for \
 
 ### End of Zinit's installer chunk
 #
-execpod (){
-	kk exec -it $1 bash
-}
-kkrep (){
-	kk delete -f $1 --force && kk create -f $1
-}
 
+SAVEHIST=100000  # Save most-recent 1000 lines
+HISTFILE=~/.zsh_history
+setopt INC_APPEND_HISTORY    # Immediately append to history file
+setopt SHARE_HISTORY        # Share history between sessions
 ## Alias
 alias kdp='kubectl delete pod'
 alias kkg="kubectl get pods"
@@ -38,6 +36,17 @@ alias kcx=kubectx
 alias kk=kubectl
 alias shrc="vim ~/.zshrc"
 alias vimrc="vim ~/.vimrc"
+alias upi="uv pip install"
+alias up="uv pip"
+alias upir="uv pip install -r"
+
+source ~/dotfiles/kubectl_aliases
+execpod (){
+	kk exec -it $1 -- bash
+}
+kkrep (){
+	kk delete -f $1 --force && kk create -f $1
+}
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -94,3 +103,8 @@ setopt promptsubst
 zi snippet OMZT::robbyrussell
 
 
+. "$HOME/.local/bin/env"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
