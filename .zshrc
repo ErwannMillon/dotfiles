@@ -102,7 +102,7 @@ setopt promptsubst
 # Load Prompt
 zi snippet OMZT::robbyrussell
 
-
+UV_MANAGED_PYTHON=1
 . "$HOME/.local/bin/env"
 
 export NVM_DIR="$HOME/.nvm"
